@@ -16,6 +16,8 @@ body {
     color: var(--text-color);
     direction: rtl;
     text-align: right;
+    margin: 0;
+    padding: 0;
 }
 
 header {
@@ -38,6 +40,32 @@ section {
     border-radius: 10px;
     box-shadow: var(--shadow);
     margin-bottom: 2rem;
+}
+
+.form-section {
+    margin-bottom: 2.5rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+form label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: bold;
+}
+
+form input, form textarea, form select {
+    width: 100%;
+    padding: 0.75rem;
+    margin-bottom: 1rem;
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    transition: border-color 0.3s ease;
+}
+
+form input:focus, form textarea:focus, form select:focus {
+    border-color: var(--accent-color);
+    outline: none;
 }
 
 .form-actions {
@@ -111,6 +139,12 @@ button:hover {
     display: block;
 }
 
+.cv-body h2 {
+    font-size: 20pt;
+    color: var(--primary-color);
+    margin-bottom: 0;
+}
+
 .cv-body h3 {
     font-size: 14pt;
     color: var(--primary-color);
@@ -121,6 +155,13 @@ button:hover {
 }
 
 /* تنسيقات الأقسام في العمودين */
+.job-title-preview {
+    font-size: 14pt;
+    color: var(--accent-color);
+    margin-top: 0;
+    margin-bottom: 1rem;
+}
+
 .contact-info p, .social-links a {
     font-size: 10pt;
     margin-bottom: 0.2rem;
@@ -129,6 +170,7 @@ button:hover {
 
 .social-links a {
     color: var(--primary-color);
+    text-decoration: none;
 }
 
 .skills-list, .languages-list {
@@ -147,15 +189,22 @@ button:hover {
     margin-bottom: 1.5rem;
 }
 
-.job-title-preview, .degree-preview {
+.job-title-preview-item, .degree-preview-item {
     font-weight: bold;
     font-size: 12pt;
     color: var(--primary-color);
+    margin-bottom: 0.2rem;
 }
 
-.work-period-preview, .university-preview {
+.company-preview, .university-preview {
     font-size: 10pt;
     color: #666;
+    margin-bottom: 0.2rem;
+}
+
+.work-period-preview {
+    font-size: 10pt;
+    color: #999;
 }
 
 /* تنسيقات الثيمات */
@@ -184,5 +233,11 @@ button:hover {
         box-shadow: none;
         border: 1px solid #000;
         min-height: auto;
+    }
+
+    /* ضمان تطبيق ألوان الخلفية والنص في الأزرار والمهارات */
+    .skills-list li, .languages-list li {
+        background-color: var(--secondary-color);
+        color: var(--text-color);
     }
 }

@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // وظيفة لإضافة حقل خبرة جديد
     function addExperienceField(data = {}) {
         const div = document.createElement('div');
-        div.classList.add('experience-item');
+        div.classList.add('experience-item-field');
         div.innerHTML = `
             <hr>
             <label>المسمّى الوظيفيّ:</label>
@@ -50,7 +50,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // وظيفة لإضافة حقل تعليم جديد
     function addEducationField(data = {}) {
         const div = document.createElement('div');
-        div.classList.add('education-item');
+        div.classList.add('education-item-field');
         div.innerHTML = `
             <hr>
             <label>المؤهّل العلميّ:</label>
@@ -133,19 +133,19 @@ document.addEventListener('DOMContentLoaded', () => {
             github: document.getElementById('github').value,
             skills: document.querySelector('.skill-input').value,
             languages: document.querySelector('.language-input').value,
-            experiences: Array.from(document.querySelectorAll('.experience-item')).map(item => ({
+            experiences: Array.from(document.querySelectorAll('.experience-item-field')).map(item => ({
                 jobTitle: item.querySelector('.job-title').value,
                 company: item.querySelector('.company').value,
                 period: item.querySelector('.work-period').value,
                 responsibilities: item.querySelector('.responsibilities').value
             })),
-            education: Array.from(document.querySelectorAll('.education-item')).map(item => ({
+            education: Array.from(document.querySelectorAll('.education-item-field')).map(item => ({
                 degree: item.querySelector('.degree').value,
                 university: item.querySelector('.university').value,
                 year: item.querySelector('.graduation-year').value
             })),
             theme: themeSelect.value,
-            photo: photoDataURL // حفظ بيانات الصورة
+            photo: photoDataURL
         };
         localStorage.setItem('cv_draft', JSON.stringify(data));
         alert('تمّ حفظ المسوّدة بنجاح!');
@@ -204,14 +204,14 @@ document.addEventListener('DOMContentLoaded', () => {
         const skills = document.querySelector('.skill-input').value.split(',').map(s => s.trim()).filter(Boolean);
         const languages = document.querySelector('.language-input').value.split(',').map(l => l.trim()).filter(Boolean);
 
-        const experiences = Array.from(document.querySelectorAll('.experience-item')).map(item => ({
+        const experiences = Array.from(document.querySelectorAll('.experience-item-field')).map(item => ({
             jobTitle: item.querySelector('.job-title').value,
             company: item.querySelector('.company').value,
             period: item.querySelector('.work-period').value,
             responsibilities: item.querySelector('.responsibilities').value
         }));
 
-        const education = Array.from(document.querySelectorAll('.education-item')).map(item => ({
+        const education = Array.from(document.querySelectorAll('.education-item-field')).map(item => ({
             degree: item.querySelector('.degree').value,
             university: item.querySelector('.university').value,
             year: item.querySelector('.graduation-year').value
@@ -256,9 +256,9 @@ document.addEventListener('DOMContentLoaded', () => {
                     <div class="experience-list">
                         ${experiences.filter(exp => exp.jobTitle).map(exp => `
                             <div class="experience-item">
-                                <h4>${exp.jobTitle}</h4>
-                                <p><strong>${exp.company}</strong> | ${exp.period}</p>
-                                <p>${exp.responsibilities}</p>
+                                <h4 class="job-title-preview-item">${exp.jobTitle}</h4>
+                                <p class="company-preview"><strong>${exp.company}</strong> | <span class="work-period-preview">${exp.period}</span></p>
+                                <p class="responsibilities-preview">${exp.responsibilities}</p>
                             </div>
                         `).join('')}
                     </div>` : ''}
@@ -267,8 +267,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     <div class="education-list">
                         ${education.filter(edu => edu.degree).map(edu => `
                             <div class="education-item">
-                                <h4>${edu.degree}</h4>
-                                <p><strong>${edu.university}</strong> (${edu.year})</p>
+                                <h4 class="degree-preview-item">${edu.degree}</h4>
+                                <p class="university-preview"><strong>${edu.university}</strong> (${edu.year})</p>
                             </div>
                         `).join('')}
                     </div>` : ''}

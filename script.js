@@ -289,7 +289,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // وظيفة تحميل السيرة الذاتيّة كملف PDF
     downloadCvBtn.addEventListener('click', () => {
-        const element = document.getElementById('cv-preview');
+        const element = document.getElementById('cv-preview').querySelector('.cv-body');
         html2pdf(element, {
             margin: [0, 0, 0, 0],
             filename: `${document.getElementById('name').value}_السيرة-الذاتية.pdf`,

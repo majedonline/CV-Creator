@@ -288,14 +288,26 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // وظيفة تحميل السيرة الذاتيّة كملف PDF
+    // وظيفة تحميل السيرة الذاتيّة كملف PDF
     downloadCvBtn.addEventListener('click', () => {
-        const element = document.getElementById('cv-preview').querySelector('.cv-body');
-        html2pdf(element, {
+        const name = document.getElementById('name').value;
+        const cvContent = document.getElementById('cv-preview').innerHTML;
+        
+        // إنشاء عنصر مؤقت لتحويله إلى PDF
+        const tempElement = document.createElement('div');
+        tempElement.style.position = 'absolute';
+        tempElement.style.left = '-9999px';
+        tempElement.innerHTML = cvContent;
+        document.body.appendChild(tempElement);
+        
+        html2pdf(tempElement, {
             margin: [0, 0, 0, 0],
-            filename: `${document.getElementById('name').value}_السيرة-الذاتية.pdf`,
+            filename: `${name}_السيرة-الذاتية.pdf`,
             image: { type: 'jpeg', quality: 0.98 },
             html2canvas: { scale: 2 },
             jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+        }).then(() => {
+            // إزالة العنصر المؤقت بعد الانتهاء
+            document.body.removeChild(tempElement);
         });
     });
-});

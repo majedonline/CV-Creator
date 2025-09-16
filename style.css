@@ -1,12 +1,14 @@
 :root {
-    --primary-color: #3498db;
-    --secondary-color: #ecf0f1;
+    --primary-color: #2c3e50;
+    --accent-color: #3498db;
+    --secondary-color: #f4f6f7;
     --text-color: #2c3e50;
     --border-color: #bdc3c7;
-    --font-family: 'Arial', sans-serif;
+    --font-family: "Cairo", "Amiri", "Arial", sans-serif;
     --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
+/* إعدادات عامة */
 * {
     box-sizing: border-box;
     margin: 0;
@@ -16,14 +18,15 @@
 body {
     font-family: var(--font-family);
     line-height: 1.6;
-    background-color: #f8f9fa;
+    background-color: var(--secondary-color);
     color: var(--text-color);
-    direction: rtl; /* لضمان النصّ من اليمين إلى اليسار */
-    text-align: right; /* محاذاة النصّ إلى اليمين */
+    direction: rtl;
+    text-align: right;
 }
 
+/* الرأس */
 header {
-    background-color: var(--primary-color);
+    background-color: var(--accent-color);
     color: #fff;
     text-align: center;
     padding: 2rem 0;
@@ -44,17 +47,11 @@ section {
     margin-bottom: 2rem;
 }
 
+/* أقسام النموذج */
 .form-section {
     margin-bottom: 2.5rem;
     padding-bottom: 1.5rem;
     border-bottom: 1px solid var(--border-color);
-}
-
-.form-section h3 {
-    color: var(--primary-color);
-    margin-bottom: 1.5rem;
-    border-bottom: 2px solid var(--primary-color);
-    padding-bottom: 0.5rem;
 }
 
 form label {
@@ -73,12 +70,13 @@ form input, form textarea {
 }
 
 form input:focus, form textarea:focus {
-    border-color: var(--primary-color);
+    border-color: var(--accent-color);
     outline: none;
 }
 
+/* أزرار */
 button {
-    background-color: var(--primary-color);
+    background-color: var(--accent-color);
     color: #fff;
     border: none;
     padding: 0.75rem 1.5rem;
@@ -102,64 +100,96 @@ button:hover {
     display: none;
 }
 
-/* تصميم قسم المعاينة */
-#cv-preview {
-    padding: 2rem;
+/* إعدادات A4 */
+.a4-sheet {
+    width: 210mm;
+    min-height: 297mm;
+    padding: 20mm;
+    background: #fff;
+    margin: auto;
+    box-shadow: 0 0 5px rgba(0,0,0,0.1);
+    font-size: 12pt;
 }
 
-.cv-header {
+@page {
+    size: A4;
+    margin: 20mm;
+}
+
+/* معاينة السيرة */
+#cv-preview .placeholder {
     text-align: center;
-    margin-bottom: 2rem;
-    position: relative;
-    padding-bottom: 1rem;
+    color: #7f8c8d;
+    font-style: italic;
+}
+
+/* الرأس في المعاينة */
+.cv-header {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 1rem;
     border-bottom: 2px solid var(--border-color);
+    padding-bottom: 1rem;
+    margin-bottom: 1.5rem;
 }
 
 .cv-header h2 {
-    color: var(--primary-color);
+    font-size: 20pt;
+    margin-bottom: 0.2rem;
+}
+
+.job-title-preview {
+    font-size: 14pt;
+    color: var(--accent-color);
     margin-bottom: 0.5rem;
 }
 
 .profile-photo {
-    width: 120px;
-    height: 120px;
+    width: 100px;
+    height: 100px;
     border-radius: 50%;
     object-fit: cover;
-    border: 3px solid var(--primary-color);
-    margin: 1rem auto;
-    display: block;
+    border: 2px solid var(--accent-color);
 }
 
+/* معلومات التواصل */
 .contact-info p {
     margin: 0.2rem 0;
+    font-size: 11pt;
 }
 
-.contact-info a {
-    color: var(--primary-color);
+.social-links a {
+    color: var(--accent-color);
     text-decoration: none;
+    margin-left: 0.5rem;
 }
 
-.preview-section h3 {
-    color: var(--primary-color);
-    margin-top: 2rem;
-    padding-bottom: 0.5rem;
-    border-bottom: 2px solid var(--primary-color);
+/* أقسام المحتوى */
+.cv-body h3 {
+    color: var(--accent-color);
+    margin-top: 1.5rem;
+    margin-bottom: 0.5rem;
+    border-bottom: 1px solid var(--accent-color);
+    padding-bottom: 0.25rem;
+    font-size: 13pt;
 }
 
-.preview-section ul {
+.cv-body p, .cv-body li {
+    font-size: 11pt;
+    margin-bottom: 0.5rem;
+}
+
+ul {
     list-style: none;
     padding: 0;
-    margin-top: 1rem;
 }
 
-.preview-section li {
-    margin-bottom: 1.5rem;
+li {
+    margin-bottom: 1rem;
 }
 
-.preview-section strong {
-    font-size: 1.1rem;
-}
-
+/* أزرار المعاينة */
 .preview-actions {
     text-align: center;
     margin-top: 2rem;

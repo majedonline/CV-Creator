@@ -40,30 +40,12 @@ section {
     margin-bottom: 2rem;
 }
 
-.form-section {
-    margin-bottom: 2.5rem;
-    padding-bottom: 1.5rem;
-    border-bottom: 1px solid var(--border-color);
-}
-
-form label {
-    display: block;
-    margin-bottom: 0.5rem;
-    font-weight: bold;
-}
-
-form input, form textarea, form select {
-    width: 100%;
-    padding: 0.75rem;
-    margin-bottom: 1rem;
-    border: 1px solid var(--border-color);
-    border-radius: 5px;
-    transition: border-color 0.3s ease;
-}
-
-form input:focus, form textarea:focus, form select:focus {
-    border-color: var(--accent-color);
-    outline: none;
+.form-actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 2rem;
 }
 
 button {
@@ -82,48 +64,41 @@ button:hover {
     transform: translateY(-2px);
 }
 
-.form-actions {
-    text-align: center;
-    margin-top: 2rem;
+.danger-btn {
+    background-color: #e74c3c;
+}
+
+.danger-btn:hover {
+    background-color: #c0392b;
 }
 
 .hidden {
     display: none;
 }
 
-/* تنسيقات قسم المعاينة */
-#cv-preview {
-    padding: 2rem;
-}
-
+/* -------------------------------------------
+ * تنسيقات تصميم السيرة الذاتية النهائي
+ * ------------------------------------------- */
 .cv-body {
     width: 210mm;
     min-height: 297mm;
-    padding: 20mm;
     background: #fff;
     margin: auto;
-    font-size: 12pt;
-}
-
-.cv-header {
+    font-size: 11pt;
     display: flex;
-    align-items: flex-start;
-    gap: 1.5rem;
-    padding-bottom: 1rem;
-    margin-bottom: 1.5rem;
-    border-bottom: 2px solid var(--accent-color);
+    box-shadow: var(--shadow);
 }
 
-.cv-header h2 {
-    font-size: 20pt;
-    margin: 0 0 0.2rem 0;
-    color: var(--primary-color);
+.left-column {
+    flex: 1;
+    background-color: var(--secondary-color);
+    padding: 20mm 15mm;
+    color: var(--text-color);
 }
 
-.job-title-preview {
-    font-size: 14pt;
-    color: var(--accent-color);
-    margin: 0 0 0.5rem 0;
+.right-column {
+    flex: 2;
+    padding: 20mm 15mm;
 }
 
 .profile-photo {
@@ -132,72 +107,71 @@ button:hover {
     border-radius: 50%;
     object-fit: cover;
     border: 2px solid var(--accent-color);
-}
-
-.contact-info p, .social-links a {
-    font-size: 11pt;
-    margin-bottom: 0.2rem;
-}
-
-.social-links a {
-    color: var(--accent-color);
-    text-decoration: none;
-    margin-left: 0.5rem;
+    margin-bottom: 1rem;
+    display: block;
 }
 
 .cv-body h3 {
+    font-size: 14pt;
     color: var(--primary-color);
     margin-top: 1.5rem;
     margin-bottom: 0.5rem;
-    border-bottom: 1px solid var(--primary-color);
+    border-bottom: 2px solid var(--accent-color);
     padding-bottom: 0.25rem;
-    font-size: 13pt;
 }
 
-ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
+/* تنسيقات الأقسام في العمودين */
+.contact-info p, .social-links a {
+    font-size: 10pt;
+    margin-bottom: 0.2rem;
+    color: var(--text-color);
 }
 
-li {
-    margin-bottom: 1rem;
+.social-links a {
+    color: var(--primary-color);
 }
 
 .skills-list, .languages-list {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
     list-style: none;
     padding: 0;
+    margin-top: 0.5rem;
 }
 
 .skills-list li, .languages-list li {
-    background-color: var(--secondary-color);
-    padding: 0.5rem 1rem;
-    border-radius: 20px;
-    font-size: 0.9rem;
+    font-size: 10pt;
+    margin-bottom: 0.2rem;
     color: var(--text-color);
-    border: 1px solid var(--border-color);
+}
+
+.experience-item, .education-item {
+    margin-bottom: 1.5rem;
+}
+
+.job-title-preview, .degree-preview {
+    font-weight: bold;
+    font-size: 12pt;
+    color: var(--primary-color);
+}
+
+.work-period-preview, .university-preview {
+    font-size: 10pt;
+    color: #666;
 }
 
 /* تنسيقات الثيمات */
 .green-theme {
     --primary-color: #27ae60;
     --accent-color: #2ecc71;
-    --text-color: #2c3e50;
-    --border-color: #bdc3c7;
+    --secondary-color: #e8f6f3;
 }
 
 .purple-theme {
     --primary-color: #8e44ad;
     --accent-color: #9b59b6;
-    --text-color: #2c3e50;
-    --border-color: #bdc3c7;
+    --secondary-color: #f6eafc;
 }
 
 /* تنسيقات الطباعة والتصدير إلى PDF */
-/* تُطبَّق هذه التنسيقات فقط عند الطباعة أو التحويل إلى PDF */
 @media print {
     body {
         background-color: #fff !important;
@@ -207,19 +181,8 @@ li {
     }
 
     .cv-body {
-        background: #fff;
-        border: none;
         box-shadow: none;
-    }
-
-    .cv-body .cv-header,
-    .cv-body h3 {
-        border-color: var(--accent-color) !important;
-    }
-
-    /* ضمان تطبيق ألوان الخلفية والنص في الأزرار والمهارات */
-    .skills-list li, .languages-list li {
-        background-color: var(--secondary-color);
-        color: var(--text-color);
+        border: 1px solid #000;
+        min-height: auto;
     }
 }

@@ -3,39 +3,65 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>إنشاء سيرة ذاتيّة احترافيّة</title>
+    <title>مُنشئ السيرة الذاتيّة الاحترافيّة</title>
     <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.3/html2pdf.bundle.min.js"></script>
 </head>
 <body>
     <header>
-        <h1>مُنشئ السيرة الذاتيّة</h1>
-        <p>أدخِل بياناتكَ لإنشاءِ سيرتكَ الذاتيّةِ الاحترافيّةِ.</p>
+        <h1>مُنشئ السيرة الذاتيّة الاحترافيّة</h1>
+        <p>قم بملءِ البياناتِ لإنشاءِ سيرتكَ الذاتيّةِ.</p>
     </header>
 
     <main>
         <section id="input-section">
-            <h2>البيانات الشخصيّة</h2>
+            <h2>أدخِل بياناتكَ</h2>
             <form id="cv-form">
-                <label for="name">الاسم الكامل:</label>
-                <input type="text" id="name" name="name" required>
+                
+                <div class="form-section">
+                    <h3>المعلومات الشخصيّة</h3>
+                    <label for="name">الاسم الكامل:</label>
+                    <input type="text" id="name" name="name" placeholder="مثال: محمّد عليّ" required>
 
-                <label for="email">البريد الإلكتروني:</label>
-                <input type="email" id="email" name="email" required>
+                    <label for="title">المُسمّى الوظيفيّ:</label>
+                    <input type="text" id="title" name="title" placeholder="مثال: مُهندس برامِج">
 
-                <label for="phone">رقم الهاتف:</label>
-                <input type="tel" id="phone" name="phone">
+                    <label for="photo">أضِف صورتكَ الشخصيّةَ:</label>
+                    <input type="file" id="photo" name="photo" accept="image/*">
+                </div>
 
-                <h3>الخبرات العمليّة</h3>
-                <div id="experience-container">
-                    </div>
-                <button type="button" id="add-experience">أضِف خبرةً جديدةً</button>
+                <div class="form-section">
+                    <h3>معلومات الاتّصال والروابط</h3>
+                    <label for="email">البريد الإلكترونيّ:</label>
+                    <input type="email" id="email" name="email" placeholder="example@domain.com" required>
 
-                <h3>المؤهّلات العلميّة</h3>
-                <div id="education-container">
-                    </div>
-                <button type="button" id="add-education">أضِف مؤهّلًا علميًّا</button>
+                    <label for="phone">رقم الهاتف:</label>
+                    <input type="tel" id="phone" name="phone" placeholder="+961 70 000 000">
 
-                <button type="submit">إنشاء السيرة الذاتيّة</button>
+                    <label for="linkedin">رابط لينكدإن (LinkedIn):</label>
+                    <input type="url" id="linkedin" name="linkedin" placeholder="https://linkedin.com/in/your-profile">
+
+                    <label for="github">رابط غيت هاب (GitHub):</label>
+                    <input type="url" id="github" name="github" placeholder="https://github.com/your-username">
+                </div>
+
+                <div class="form-section">
+                    <h3>الخبرات العمليّة</h3>
+                    <div id="experience-container">
+                        </div>
+                    <button type="button" id="add-experience">أضِف خبرةً جديدةً</button>
+                </div>
+
+                <div class="form-section">
+                    <h3>المؤهّلات العلميّة</h3>
+                    <div id="education-container">
+                        </div>
+                    <button type="button" id="add-education">أضِف مؤهّلًا علميًّا</button>
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit">مُعاينة السيرة الذاتيّة</button>
+                </div>
             </form>
         </section>
 
@@ -43,12 +69,15 @@
             <h2>مُعاينة السيرة الذاتيّة</h2>
             <div id="cv-preview">
                 </div>
-            <button id="download-cv">تحميل السيرة الذاتيّة (PDF)</button>
+            <div class="preview-actions">
+                <button id="edit-cv">تعديل</button>
+                <button id="download-cv">تحميل السيرة الذاتيّة (PDF)</button>
+            </div>
         </section>
     </main>
 
     <footer>
-        <p>&copy; 2024 مُنشئ السيرة الذاتيّة</p>
+        <p>&copy; 2024 مُنشئ السيرة الذاتيّة. جميع الحقوق محفوظة.</p>
     </footer>
 
     <script src="script.js"></script>

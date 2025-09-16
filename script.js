@@ -12,57 +12,62 @@ document.addEventListener('DOMContentLoaded', () => {
     const photoInput = document.getElementById('photo');
     let photoDataURL = '';
 
-    // وظيفة لإضافة حقل خبرة جديد
-    function addExperienceField() {
+    // =========================
+    // الوظائف لإضافة حقول جديدة
+    // =========================
+    function addExperienceField(data = {}) {
         const div = document.createElement('div');
         div.classList.add('experience-item');
         div.innerHTML = `
             <hr>
             <label>المُسمّى الوظيفيّ:</label>
-            <input type="text" class="job-title" placeholder="مدير مشروع">
+            <input type="text" class="job-title" placeholder="مدير مشروع" value="${data.jobTitle || ''}">
             <label>الشركة:</label>
-            <input type="text" class="company" placeholder="شركة التكنولوجيا">
+            <input type="text" class="company" placeholder="شركة التكنولوجيا" value="${data.company || ''}">
             <label>فترة العمل:</label>
-            <input type="text" class="work-period" placeholder="يناير 2020 - حتّى الآن">
+            <input type="text" class="work-period" placeholder="يناير 2020 - حتّى الآن" value="${data.period || ''}">
             <label>المهام والمسؤوليّات:</label>
-            <textarea class="responsibilities" placeholder="أدرت فريقًا من 10 أفراد..."></textarea>
+            <textarea class="responsibilities" placeholder="أدرت فريقًا من 10 أفراد...">${data.responsibilities || ''}</textarea>
             <button type="button" class="remove-btn">إزالة</button>
         `;
         experienceContainer.appendChild(div);
     }
 
-    // وظيفة لإضافة حقل تعليم جديد
-    function addEducationField() {
+    function addEducationField(data = {}) {
         const div = document.createElement('div');
         div.classList.add('education-item');
         div.innerHTML = `
             <hr>
             <label>المؤهّل العلميّ:</label>
-            <input type="text" class="degree" placeholder="بكالوريوس في علوم الحاسوب">
+            <input type="text" class="degree" placeholder="بكالوريوس في علوم الحاسوب" value="${data.degree || ''}">
             <label>الجامعة/المؤسّسة:</label>
-            <input type="text" class="university" placeholder="الجامعة الأميركيّة في بيروت">
+            <input type="text" class="university" placeholder="الجامعة الأميركيّة في بيروت" value="${data.university || ''}">
             <label>سنة التخرّج:</label>
-            <input type="text" class="graduation-year" placeholder="2019">
+            <input type="text" class="graduation-year" placeholder="2019" value="${data.year || ''}">
             <button type="button" class="remove-btn">إزالة</button>
         `;
         educationContainer.appendChild(div);
     }
 
-    // إضافة حقل واحد تلقائيًّا عند التحميل
-    addExperienceField();
-    addEducationField();
+    // إضافة حقل واحد تلقائيًا عند التحميل
+    if (experienceContainer.children.length === 0) addExperienceField();
+    if (educationContainer.children.length === 0) addEducationField();
 
-    addExperienceBtn.addEventListener('click', addExperienceField);
-    addEducationBtn.addEventListener('click', addEducationField);
+    addExperienceBtn.addEventListener('click', () => addExperienceField());
+    addEducationBtn.addEventListener('click', () => addEducationField());
 
-    // وظيفة إزالة حقل
+    // =========================
+    // إزالة الحقول
+    // =========================
     document.addEventListener('click', (e) => {
         if (e.target.classList.contains('remove-btn')) {
             e.target.parentElement.remove();
         }
     });
 
-    // تحميل الصورة إلى الذاكرة
+    // =========================
+    // تحميل الصورة
+    // =========================
     photoInput.addEventListener('change', (e) => {
         const file = e.target.files[0];
         if (file) {
@@ -74,7 +79,9 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // إنشاء معاينة السيرة الذاتيّة
+    // =========================
+    // إنشاء معاينة السيرة الذاتية
+    // =========================
     cvForm.addEventListener('submit', (e) => {
         e.preventDefault();
 
@@ -85,7 +92,6 @@ document.addEventListener('DOMContentLoaded', () => {
         const linkedin = document.getElementById('linkedin').value;
         const github = document.getElementById('github').value;
 
-        // جمع بيانات الخبرات
         const experiences = [];
         document.querySelectorAll('.experience-item').forEach(item => {
             experiences.push({
@@ -96,7 +102,6 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
 
-        // جمع بيانات التعليم
         const education = [];
         document.querySelectorAll('.education-item').forEach(item => {
             education.push({
@@ -106,24 +111,26 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
 
-        // إنشاء هيكل HTML للسيرة الذاتية
+        // بناء HTML للسيرة
         let htmlContent = `
-            <div class="cv-container">
+            <div class="cv-body">
                 <div class="cv-header">
                     ${photoDataURL ? `<img src="${photoDataURL}" alt="صورة شخصيّة" class="profile-photo">` : ''}
-                    <h2>${name}</h2>
-                    <p class="job-title-preview">${title}</p>
-                    <div class="contact-info">
-                        <p>${email}</p>
-                        ${phone ? `<p>${phone}</p>` : ''}
-                    </div>
-                    <div class="social-links">
-                        ${linkedin ? `<a href="${linkedin}" target="_blank">LinkedIn</a>` : ''}
-                        ${github ? `<a href="${github}" target="_blank">GitHub</a>` : ''}
+                    <div>
+                        <h2>${name}</h2>
+                        <p class="job-title-preview">${title}</p>
+                        <div class="contact-info">
+                            <p>${email}</p>
+                            ${phone ? `<p>${phone}</p>` : ''}
+                        </div>
+                        <div class="social-links">
+                            ${linkedin ? `<a href="${linkedin}" target="_blank">LinkedIn</a>` : ''}
+                            ${github ? `<a href="${github}" target="_blank">GitHub</a>` : ''}
+                        </div>
                     </div>
                 </div>
 
-                <h3>الخبرة العمليّة</h3>
+                ${experiences.some(e => e.jobTitle) ? `<h3>الخبرة العمليّة</h3>
                 <ul class="experience-list">
                     ${experiences.filter(exp => exp.jobTitle).map(exp => `
                         <li>
@@ -132,16 +139,16 @@ document.addEventListener('DOMContentLoaded', () => {
                             <p>${exp.responsibilities}</p>
                         </li>
                     `).join('')}
-                </ul>
+                </ul>` : ''}
 
-                <h3>المؤهّلات العلميّة</h3>
+                ${education.some(e => e.degree) ? `<h3>المؤهّلات العلميّة</h3>
                 <ul class="education-list">
                     ${education.filter(edu => edu.degree).map(edu => `
                         <li>
                             <strong>${edu.degree}</strong> من ${edu.university} (${edu.year})
                         </li>
                     `).join('')}
-                </ul>
+                </ul>` : ''}
             </div>
         `;
 
@@ -150,18 +157,22 @@ document.addEventListener('DOMContentLoaded', () => {
         previewSection.classList.remove('hidden');
     });
 
-    // وظيفة للعودة إلى صفحة التعديل
+    // =========================
+    // العودة للتعديل مع إعادة ملء البيانات
+    // =========================
     editCvBtn.addEventListener('click', () => {
         previewSection.classList.add('hidden');
         inputSection.classList.remove('hidden');
     });
 
-    // وظيفة تحميل السيرة الذاتيّة كملف PDF
+    // =========================
+    // تحميل PDF
+    // =========================
     downloadCvBtn.addEventListener('click', () => {
         const element = document.getElementById('cv-preview');
         html2pdf(element, {
-            margin: [10, 10, 10, 10], // top, left, bottom, right
-            filename: `${document.getElementById('name').value}_السيرة-الذاتية.pdf`,
+            margin: [10, 10, 10, 10],
+            filename: `${document.getElementById('name').value || 'السيرة'}_الذاتية.pdf`,
             image: { type: 'jpeg', quality: 0.98 },
             html2canvas: { scale: 2 },
             jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
